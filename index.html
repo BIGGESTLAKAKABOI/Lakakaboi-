@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biggest Select — EARN. SIMPLY.</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#050505; color:#fff; min-height:100vh; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background-image:repeating-linear-gradient(115deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 14px); }
+.screen { display:none; } .screen.active { display:block; }
+.serif { font-family:Georgia, serif; }
+.top { padding:22px 20px 10px; display:flex; justify-content:space-between; align-items:center; max-width:480px; margin:0 auto; position:relative; }
+.page { padding:6px 20px 120px; max-width:480px; margin:0 auto; }
+.lang-btn { border:1px solid #4a3a12; background:#0e0e0e; padding:10px 14px; border-radius:12px; font-size:13px; color:#fff; display:flex; gap:8px; align-items:center; cursor:pointer; }
+.page-title { font-size:38px; margin:12px 0 18px; }
+.pill-gold { border:1px solid #4a3a12; background:#1a1508; color:#e8b44a; padding:8px 14px; border-radius:20px; font-size:11px; letter-spacing:1.5px; }
+.adselect-card { background:#0e0e0e; border:1px solid #1e1e1e; border-radius:24px; padding:22px; margin:12px 0 20px; }
+.balance { font-size:56px; font-weight:300; margin:14px 0 10px; }
+.cashout-btn { width:100%; background:#222; color:#fff; border:none; padding:18px; border-radius:16px; font-size:16px; cursor:pointer; box-shadow:4px 4px 0 #3a3a3a; margin-bottom:20px; }
+.cashout-white { background:#fff; color:#000; box-shadow:4px 4px 0 #555; font-weight:600; padding:14px 28px; border-radius:14px; border:none; font-size:14px; cursor:pointer; }
+.task-card { background:#0e0e0e; border:1px solid #1e1e1e; border-radius:20px; padding:18px; margin-bottom:14px; }
+.claim-btn { background:#2a2a2a; color:#fff; border:none; padding:13px 18px; border-radius:12px; font-size:14px; cursor:pointer; box-shadow:3px 3px 0 #444; }
+.watch-row { display:flex; align-items:center; gap:14px; padding:16px 0; border-bottom:1px solid #111; }
+.watch-icon { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; }
+.watch-icon.purple { background:#2a1e4a; } .watch-icon.green { background:#0f2a1e; } .watch-icon.blue { background:#0f1e3a; }
+.watch-btn { margin-left:auto; background:#fff; color:#000; border:none; padding:13px 24px; border-radius:14px; font-weight:600; cursor:pointer; box-shadow:3px 3px 0 #555; }
+.team-stats { background:#0e0e0e; border:1px solid #1e1e1e; border-radius:18px; display:flex; overflow:hidden; margin-bottom:16px; }
+.team-stats div { flex:1; text-align:center; padding:20px 0; border-right:1px solid #1e1e1e; } .team-stats div:last-child { border:none; }
+.team-stats b { font-size:32px; font-weight:300; display:block; } .team-stats b.gold { color:#e8b44a; font-size:16px; margin-top:8px; }
+.team-stats span { font-size:11px; letter-spacing:2px; color:#888; }
+.invite-bar { display:flex; background:#1a1a1a; border:1px solid #222; border-radius:14px; overflow:hidden; margin-bottom:20px; }
+.invite-bar div { flex:1; padding:14px; font-size:13px; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.invite-bar button { background:#fff; color:#000; border:none; padding:0 20px; font-weight:600; cursor:pointer; }
+.empty-box { text-align:center; padding:30px 0; } .empty-icon { width:64px; height:64px; background:#1a1a1a; border-radius:16px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+.wallet-bal-row { background:#0e0e0e; border:1px solid #1e1e1e; border-radius:18px; padding:22px; display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+.wallet-bal-row span { letter-spacing:2px; color:#888; font-size:13px; } .wallet-bal-row b { font-size:36px; font-weight:300; }
+.hist-row { display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #111; font-size:14px; }
+.hist-row .left { display:flex; gap:12px; align-items:center; } .hist-row .ic { width:36px; height:36px; background:#1a1a1a; border-radius:10px; display:flex; align-items:center; justify-content:center; }
+.hist-row small { display:block; color:#888; font-size:11px; } .hist-row b { color:#e8b44a; } .hist-row b.neg { color:#ff5a5a; }
+.me-head { display:flex; gap:16px; align-items:center; margin:10px 0 24px; } .me-avatar { width:64px; height:64px; background:#1e1e1e; border:1px solid #2a2a2a; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:28px; font-family:Georgia,serif; }
+.me-row { display:flex; align-items:center; gap:14px; padding:16px 0; border-bottom:1px solid #111; cursor:pointer; } .me-row .ic { width:42px; height:42px; background:#1a1a1a; border:1px solid #222; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; } .me-row span { flex:1; font-size:15px; } .me-row em { color:#555; font-style:normal; }
+.crypto-chip { border:1px solid #2a2a2a; background:#1a1a1a; padding:10px 14px; border-radius:20px; font-size:12px; cursor:pointer; } .crypto-chip.active { background:#e8b44a; color:#000; border-color:#e8b44a; font-weight:700; }
+.login-wrap { max-width:480px; margin:0 auto; padding:16px 20px 40px; min-height:100vh; }
+.login-top { display:flex; justify-content:flex-end; padding:10px 0 10px; position:relative; }
+.brand { text-align:center; margin:10px 0 20px; } .brand h1 { font-size:44px; } .brand p { letter-spacing:6px; color:#999; font-size:13px; margin-top:14px; }
+.create-title { font-size:32px; margin:18px 0 16px; }
+.bonus-banner { background:linear-gradient(90deg,#1a1508,#221c0a); border:1px solid #4a3a12; color:#e8b44a; padding:16px 18px; border-radius:14px; font-size:16px; margin-bottom:6px; }
+.login-label { font-size:13px; letter-spacing:2px; color:#999; margin:20px 0 10px; }
+.login-input { width:100%; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:14px; padding:20px 18px; color:#fff; font-size:16px; outline:none; }
+.login-input:focus { border-color:#4a3a12; }
+.pass-wrap { position:relative; } .pass-wrap .eye { position:absolute; right:18px; top:50%; transform:translateY(-50%); font-size:20px; color:#888; cursor:pointer; background:none; border:none; }
+.forgot { text-align:right; margin:18px 0 22px; } .forgot a { color:#fff; font-size:13px; letter-spacing:2px; text-decoration:none; border-bottom:1px solid #e8b44a; padding-bottom:4px; font-weight:600; }
+.login-btn { width:100%; background:#3a3a3a; color:#777; border:none; padding:20px; border-radius:14px; font-size:16px; cursor:pointer; } .login-btn.active { background:#fff; color:#000; }
+.link-center { text-align:center; margin-top:34px; } .link-center a { color:#fff; font-size:14px; letter-spacing:2px; font-weight:700; text-decoration:none; border-bottom:1px solid #e8b44a; padding-bottom:5px; }
+.lang-dropdown { position:absolute; top:66px; right:20px; width:calc(100% - 40px); max-width:440px; background:#252d22; border-radius:18px; overflow:hidden; z-index:50; display:none; box-shadow:0 20px 40px rgba(0,0,0,0.8); border:1px solid #333; }
+.lang-dropdown.show { display:block; } .lang-opt { display:flex; justify-content:space-between; align-items:center; padding:20px; border-bottom:1px solid #3a4035; cursor:pointer; font-size:18px; } .lang-opt .dot { width:22px; height:22px; border:2px solid #aaa; border-radius:50%; display:flex; align-items:center; justify-content:center; } .lang-opt.active .dot { border-color:#8ec86a; } .lang-opt.active .dot::after { content:""; width:12px; height:12px; background:#8ec86a; border-radius:50%; }
+.lang-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:40; display:none; } .lang-overlay.show { display:block; }
+.bottom { position:fixed; bottom:0; left:0; right:0; background:#000; border-top:1px solid #1a1a1a; display:none; justify-content:space-around; padding:14px 10px 18px; z-index:20; } .bottom.show { display:flex; }
+.nav-it { flex:1; text-align:center; cursor:pointer; color:#777; } .nav-it svg { width:22px; height:22px; stroke:#777; fill:none; stroke-width:1.6; margin-bottom:6px; } .nav-it span { display:block; font-size:11px; letter-spacing:1.5px; } .nav-it.active { color:#fff; } .nav-it.active svg { stroke:#fff; } .nav-it.active::before { content:""; display:block; width:26px; height:2px; background:#e8b44a; margin:0 auto 8px; border-radius:2px; }
+input, select { width:100%; padding:14px; background:#1a1a1a; border:1px solid #2a2a2a; color:#fff; border-radius:12px; font-size:15px; margin-bottom:8px; }
+label { display:block; font-size:11px; letter-spacing:1.5px; color:#aaa; margin:14px 0 6px; }
+.btn { width:100%; padding:16px; background:#fff; color:#000; border:none; border-radius:14px; font-size:16px; font-weight:600; cursor:pointer; margin-top:12px; } .btn.dark { background:#222; color:#fff; }
+.welcome-card { background:#0e0e0e; border:1px solid #2a2415; border-radius:20px; padding:20px; margin:16px 0; }
+.detail-box { display:flex; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:12px; overflow:hidden; } .detail-box span { flex:1; padding:14px; font-size:14px; } .detail-box button { background:none; border:none; border-left:1px solid #2a2a2a; color:#fff; padding:0 16px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="lang-overlay" id="langOverlay" onclick="toggleLang(false)"></div>
+
+<!-- LOGIN -->
+<div id="loginPage" class="screen active">
+  <div class="login-wrap">
+    <div class="login-top"><div class="lang-btn" onclick="toggleLang(true)">🌐 <span id="curLang">EN</span> ⌄</div>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-opt active" data-lang="EN" onclick="setLang('EN',this)"><span>EN</span><div class="dot"></div></div>
+        <div class="lang-opt" data-lang="ES" onclick="setLang('ES',this)"><span>ES</span><div class="dot"></div></div>
+        <div class="lang-opt" data-lang="KO" onclick="setLang('KO',this)"><span>KO</span><div class="dot"></div></div>
+        <div class="lang-opt" data-lang="TL" onclick="setLang('TL',this)"><span>TL</span><div class="dot"></div></div>
+        <div class="lang-opt" data-lang="VI" onclick="setLang('VI',this)"><span>VI</span><div class="dot"></div></div>
+        <div class="lang-opt" data-lang="PT" onclick="setLang('PT',this)"><span>PT</span><div class="dot"></div></div>
+        <div class="lang-opt" data-lang="RU" onclick="setLang('RU',this)"><span>RU</span><div class="dot"></div></div>
+      </div>
+    </div>
+    <div class="brand"><h1 class="serif">Biggest Select</h1><p>EARN. SIMPLY.</p></div>
+    <div class="login-label">EMAIL, USERNAME OR ID</div><input id="loginEmail" class="login-input">
+    <div class="login-label">PASSWORD</div><div class="pass-wrap"><input id="loginPass" type="password" class="login-input"><button class="eye" onclick="togglePass()">👁</button></div>
+    <div class="forgot"><a href="#" onclick="alert('Contact admin');return false;">FORGOT?</a></div>
+    <button id="loginBtn" class="login-btn" onclick="login()">Login</button>
+    <div class="link-center"><a href="#" onclick="showAuth();return false;">CREATE ACCOUNT</a></div>
+    <div class="link-center" style="margin-top:30px;"><a href="#" onclick="alert('Your ID is your username');return false;">FORGOT ID?</a></div>
+  </div>
+</div>
+
+<!-- SIGNUP - EXACT LIKE YOUR PICTURE + $10 BONUS -->
+<div id="authPage" class="screen">
+  <div class="login-wrap">
+    <div class="login-top"><div class="lang-btn" onclick="toggleLang(true)">🌐 <span class="curLang2">EN</span> ⌄</div></div>
+    <div class="brand"><h1 class="serif" style="font-size:38px;">Biggest Select</h1><p>EARN. SIMPLY.</p></div>
+    <h2 class="serif create-title">Create Account</h2>
+    <div class="bonus-banner">🎁 Get $10.00 Sign-Up Bonus</div>
+    <div class="login-label">FULL NAME</div><input id="regFullName" class="login-input" placeholder="e.g. John Doe">
+    <div class="login-label">USERNAME</div><input id="regUsername" class="login-input" placeholder="e.g. biggest66">
+    <div class="login-label">EMAIL</div><input id="regEmail" type="email" class="login-input">
+    <div class="login-label">COUNTRY</div><select id="regCountry" class="login-input"><option>Nigeria</option><option>United States</option><option>Ghana</option><option>Kenya</option><option>Philippines</option><option>Vietnam</option><option>Brazil</option><option>Russia</option><option>South Korea</option><option>Other</option></select>
+    <div class="login-label">MOBILE NUMBER</div><input id="regPhone" class="login-input" placeholder="e.g. 0803...">
+    <div class="login-label">SPONSOR (Optional)</div><input id="regSponsor" class="login-input">
+    <div class="login-label">PASSWORD</div><input id="regPass" type="password" class="login-input">
+    <div class="login-label">CONFIRM PASSWORD</div><input id="regPass2" type="password" class="login-input">
+    <div style="display:flex; gap:10px; margin:18px 0; font-size:13px;"><input type="checkbox" id="terms" style="width:auto;"><span>I accept Terms & Privacy</span></div>
+    <button class="login-btn active" onclick="register()" style="background:#fff; color:#000;">Create Account — Get $10.00</button>
+    <div class="link-center"><a href="#" onclick="showLogin();return false;">LOGIN</a></div>
+  </div>
+</div>
+
+<div id="welcomePage" class="screen"><div style="padding:20px; max-width:480px; margin:0 auto;"><h1 class="serif" style="text-align:center; font-size:36px;">Biggest Select</h1><h2 class="serif" style="font-size:30px; margin:24px 0 12px;">welcome, <span id="welcomeName">user</span></h2><div class="welcome-card"><div style="margin-bottom:14px;"><label>USERNAME</label><div class="detail-box"><span id="welcomeUser">user</span><button onclick="copyText('welcomeUser')">COPY</button></div></div><div><label>EMAIL</label><div class="detail-box"><span id="welcomeEmail">email</span><button onclick="copyText('welcomeEmail')">COPY</button></div></div><div style="background:#1a1508; border:1px dashed #4a3a12; border-radius:12px; padding:12px; font-size:13px; color:#e8b44a; margin-top:14px;">🎁 $10.00 Sign-Up Bonus added!</div></div><button class="btn" onclick="goHome()">Continue</button></div></div>
+
+<div id="homePage" class="screen">
+  <div class="top"><div class="serif" style="font-size:30px;">hello, <span id="helloUser">biggest66</span></div><div class="lang-btn" onclick="toggleLang(true)">🌐 <span id="curLang2">EN</span> ⌄</div></div>
+  <div class="page">
+    <div class="adselect-card"><div style="color:#999; font-size:16px; font-family:Georgia;">Biggest Select</div><div class="balance"><small>$</small><span id="bal">10.00</span></div><div style="color:#bbb; font-size:12px; letter-spacing:2px;" id="userCode">BIGGEST66</div></div>
+    <button class="cashout-btn" onclick="goWallet()">Cash Out</button>
+    <div class="task-card"><div style="display:flex; justify-content:space-between;"><div style="display:flex; gap:12px; align-items:center;"><div style="width:44px; height:44px; background:#1a1a1a; border-radius:12px; display:flex; align-items:center; justify-content:center;">🎁</div><div><h3 style="font-size:15px;">Daily Bonus · Day <span id="dayNum">1</span>/30</h3><p style="font-size:11px; color:#888;">NEXT 05:04:59</p></div></div><button id="claimBtn" class="claim-btn" onclick="claimDaily()">Claim</button></div></div>
+    <div style="display:flex; justify-content:space-between; font-size:12px; color:#888; margin:16px 2px;"><span>EARNED TODAY</span><span style="color:#e8b44a; font-size:18px; font-family:Georgia;">$<span id="earnedToday">10.00</span> ⌄</span></div>
+  </div>
+</div>
+
+<div id="earnPage" class="screen">
+  <div class="top"><div class="serif page-title">watch & earn</div><div class="pill-gold">4 LEFT TODAY</div></div>
+  <div class="page"><div class="task-card" style="padding:6px 18px;"><div class="watch-row"><div class="watch-icon purple">▶</div><div><h3>Biggest Select oppo partner</h3><p style="color:#e8b44a;">+$3.00 · 100S</p></div><button class="watch-btn" onclick="doWatch(this,3.00,'oppo')">Watch</button></div><div class="watch-row"><div class="watch-icon green">▶</div><div><h3>Biggest Select Partner ios</h3><p style="color:#e8b44a;">+$5.00 · 65S</p></div><button class="watch-btn" onclick="doWatch(this,5.00,'ios1')">Watch</button></div><div class="watch-row"><div class="watch-icon purple">▶</div><div><h3>Biggest Select Partner ios</h3><p style="color:#e8b44a;">+$4.00 · 54S</p></div><button class="watch-btn" onclick="doWatch(this,4.00,'ios2')">Watch</button></div><div class="watch-row"><div class="watch-icon blue">▶</div><div><h3>Biggest Select Guide</h3><p style="color:#e8b44a;">+$2.00 · 90S</p></div><button class="watch-btn" onclick="doWatch(this,2.00,'guide')">Watch</button></div></div><div class="task-card"><div style="display:flex; justify-content:space-between;"><div><h3>Daily Bonus · Day <span id="dayNum2">1</span></h3></div><button id="claimBtn2" class="claim-btn" onclick="claimDaily()">Claim</button></div></div></div>
+</div>
+
+<div id="teamPage" class="screen"><div class="top"><div class="serif page-title">your team</div></div><div class="page"><div class="team-stats"><div><b id="totalTeam">0</b><span>TOTAL</span></div><div><b id="activeTeam">0</b><span>ACTIVE</span></div><div><b class="gold" id="todayTeam">0</b><span>TODAY</span></div></div><div class="invite-bar"><div id="refLink">loading...</div><button onclick="copyRef()">📋 Invite</button></div><div class="empty-box"><div class="empty-icon">👥</div><div class="serif" style="font-size:22px;">no members yet</div></div></div></div>
+
+<div id="walletPage" class="screen">
+  <div class="top"><div class="serif page-title">wallet</div></div>
+  <div class="page">
+    <div class="wallet-bal-row"><span>BALANCE</span><b><small>$</small><span id="walletBal">10.00</span></b></div>
+    <div class="task-card" style="border-color:#2a2415;"><div style="font-size:12px; color:#e8b44a; margin-bottom:12px;">WITHDRAW TO</div><div style="display:flex; gap:8px; flex-wrap:wrap;"><div class="crypto-chip active" data-c="USDT (TRC20)" onclick="selectCrypto(this)">USDT • TRC20</div><div class="crypto-chip" data-c="BTC" onclick="selectCrypto(this)">BTC</div><div class="crypto-chip" data-c="TON" onclick="selectCrypto(this)">TON</div></div><div id="walletPayoutInfo" style="font-size:13px; color:#aaa; margin-top:12px;">No payout address yet — add am for ME.</div><button class="btn dark" onclick="goPayout()" style="margin-top:12px;">Add / Change Address</button></div>
+    <button class="cashout-white" onclick="cashout()">Cash Out · Min $5.00</button>
+    <div style="display:flex; justify-content:space-between; margin:28px 2px 8px; font-size:12px; letter-spacing:2px; color:#888;"><span>HISTORY</span><span style="color:#fff; cursor:pointer;" onclick="loadHistory()">ALL ↻</span></div>
+    <div id="historyList"></div><div class="empty-box" id="emptyHistory"><div class="empty-icon">🕐</div><div class="serif" style="font-size:22px;">no history yet</div></div>
+  </div>
+</div>
+
+<div id="mePage" class="screen">
+  <div class="page" style="padding-top:24px;">
+    <div style="display:flex; justify-content:flex-end;"><div class="lang-btn" onclick="toggleLang(true)">🌐 <span class="curLang2">EN</span> ⌄</div></div>
+    <div class="me-head"><div class="me-avatar" id="meAvatar">B</div><div><h2 class="serif" id="meName" style="font-size:26px;">biggest66</h2><span style="background:#1e1e1e; border:1px solid #2a2a2a; padding:6px 12px; border-radius:20px; font-size:11px; color:#aaa; display:inline-block; margin-top:8px;">ACTIVE</span></div></div>
+    <div class="task-card" style="border-color:#2a2415;"><div style="display:flex; justify-content:space-between;"><h3 class="serif" style="font-size:20px;">Withdraw</h3><span style="font-size:11px; background:#1a1508; border:1px solid #4a3a12; color:#e8b44a; padding:6px 10px; border-radius:20px;">CRYPTO</span></div><p style="font-size:12px; color:#888; margin:8px 0 12px;">Add your crypto wallet to receive payment.</p><label>SELECT COIN</label><div style="display:flex; gap:8px; flex-wrap:wrap;"><div class="crypto-chip active" data-c="USDT (TRC20)" onclick="selectCrypto(this)">USDT • TRC20</div><div class="crypto-chip" data-c="USDT (BEP20)" onclick="selectCrypto(this)">USDT • BEP20</div><div class="crypto-chip" data-c="BTC" onclick="selectCrypto(this)">BTC</div><div class="crypto-chip" data-c="TON" onclick="selectCrypto(this)">TON</div><div class="crypto-chip" data-c="SOL" onclick="selectCrypto(this)">SOL</div></div><label>YOUR WALLET ADDRESS</label><input id="payoutAddress" placeholder="e.g. TQrY..."><label>NETWORK</label><input id="payoutNetwork" placeholder="e.g. TRON"><div style="display:flex; gap:8px;"><button class="btn dark" onclick="savePayout()" style="flex:1;">Save Address</button><button class="btn" onclick="goWallet()" style="flex:1; margin-top:12px;">Withdraw Now</button></div><div id="savedPayout" style="margin-top:14px; font-size:12px; color:#888; background:#1a1a1a; padding:12px; border-radius:12px; display:none;"></div></div>
+    <div>
+      <div class="me-row" onclick="goTeam()"><div class="ic">👤</div><span>Account</span><em>›</em></div>
+      <div class="me-row" onclick="document.getElementById('payoutAddress').focus()"><div class="ic">💳</div><span>Payout Address</span><em>›</em></div>
+      <div class="me-row" onclick="goEarn()"><div class="ic">🏆</div><span>Rewards</span><em>›</em></div>
+      <div class="me-row" onclick="goWallet()"><div class="ic">🕐</div><span>History</span><em>›</em></div>
+      <div class="me-row" onclick="alert('Help')"><div class="ic">?</div><span>Help</span><em>›</em></div>
+      <div class="me-row" onclick="toggleLang(true)"><div class="ic">🌐</div><span>Language</span><span style="flex:none; background:#1a1a1a; border:1px solid #2a2a2a; padding:8px 12px; border-radius:10px; font-size:12px;" id="meLangLabel">🌐 EN ⌄</span></div>
+      <div class="me-row" onclick="logout()" style="color:#ff5a5a;"><div class="ic">↩</div><span style="color:#ff5a5a;">Logout</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="payoutPage" class="screen"><div class="top"><div class="serif" style="font-size:28px;">Payout Address</div><span style="font-size:20px; cursor:pointer;" onclick="goMe()">✕</span></div><div class="page"><div class="task-card"><label>ADDRESS</label><input id="payoutAddress2" placeholder="Paste wallet address"><button class="btn" onclick="savePayout2()">Save Address</button></div></div></div>
+
+<div class="bottom" id="navBar">
+  <div class="nav-it active" id="navHome" onclick="goHome()"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg><span>HOME</span></div>
+  <div class="nav-it" id="navEarn" onclick="goEarn()"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z" fill="currentColor" stroke="none"/></svg><span>EARN</span></div>
+  <div class="nav-it" id="navTeam" onclick="goTeam()"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 19c0-3.5 2.5-5.5 6.5-5.5s6.5 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 13.5c2.5 0 5 1.5 5 4.5"/></svg><span>TEAM</span></div>
+  <div class="nav-it" id="navWallet" onclick="goWallet()"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span>WALLET</span></div>
+  <div class="nav-it" id="navMe" onclick="goMe()"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg><span>ME</span></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs, addDoc, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = { apiKey: "AIzaSyBAgJN-lzbwBiCz0PRm1dZJ1GnpGu76OTw", authDomain: "adselectbiggest.firebaseapp.com", projectId: "adselectbiggest", storageBucket: "adselectbiggest.firebasestorage.app", messagingSenderId: "735881012710", appId: "1:735881012710:web:c5e494a45255be30876227", measurementId: "G-EJ7SL8PMQC" };
+const app = initializeApp(firebaseConfig); const auth=getAuth(app); const db=getFirestore(app);
+let currentUser=null; let settings={claim:0.10}; let selectedCoin="USDT (TRC20)"; let currentLang="EN";
+const I18N = { EN:{hello:"hello,"}, ES:{hello:"hola,"}, KO:{hello:"안녕,"}, TL:{hello:"hello,"}, VI:{hello:"xin chào,"}, PT:{hello:"olá,"}, RU:{hello:"привет,"} };
+function todayStr(){ return new Date().toDateString(); }
+function showScreen(id){ document.querySelectorAll(".screen").forEach(el=>el.classList.remove("active")); document.getElementById(id).classList.add("active"); document.querySelectorAll(".nav-it").forEach(d=>d.classList.remove("active")); toggleLang(false); }
+function toggleLang(open){ const dd=document.getElementById("langDropdown"); const ov=document.getElementById("langOverlay"); if(open){ dd.classList.add("show"); ov.classList.add("show"); } else { if(dd) dd.classList.remove("show"); ov.classList.remove("show"); } }
+function togglePass(){ const p=document.getElementById("loginPass"); p.type=p.type==="password"?"text":"password"; }
+function setLang(lang, el){ currentLang=lang; document.getElementById("curLang").textContent=lang; document.querySelectorAll(".curLang2").forEach(e=>e.textContent=lang); const c2=document.getElementById("curLang2"); if(c2) c2.textContent=lang; const ml=document.getElementById("meLangLabel"); if(ml) ml.textContent="🌐 "+lang+" ⌄"; document.querySelectorAll(".lang-opt").forEach(o=>o.classList.remove("active")); if(el) el.classList.add("active"); toggleLang(false); if(currentUser) updateDoc(doc(db,"users",currentUser.uid),{lang:lang}).catch(()=>{}); }
+function checkLoginBtn(){ const e=document.getElementById("loginEmail").value.trim(); const p=document.getElementById("loginPass").value; const b=document.getElementById("loginBtn"); if(e&&p) b.classList.add("active"); else b.classList.remove("active"); }
+document.addEventListener("input", (e)=>{ if(e.target.id==="loginEmail"||e.target.id==="loginPass") checkLoginBtn(); });
+onAuthStateChanged(auth, async(user)=>{ if(user){ currentUser=user; await loadUserData(); goHome(); } else { currentUser=null; showScreen("loginPage"); document.getElementById("navBar").classList.remove("show"); } });
+async function loadUserData(){ const ref=doc(db,"users",currentUser.uid); const snap=await getDoc(ref); if(!snap.exists()){ await setDoc(ref,{name:currentUser.email.split("@")[0],email:currentUser.email,balance:10.00,earned:10.00,day:1,lastClaim:"",referrals:0,lang:currentLang,payoutCoin:"",payoutAddress:"",created:Date.now()}); await addHistory("Sign-Up Bonus $10.00","+$10.00","🎁"); } else { const u=snap.data(); if(u.lang) currentLang=u.lang; } refreshUI(); }
+async function addHistory(title, amountText, icon, isNeg=false){ if(!currentUser) return; try{ await addDoc(collection(db,"history"),{uid:currentUser.uid,title:title,amount:amountText,icon:icon||"💰",isNeg:isNeg,time:Date.now(),date:new Date().toLocaleString()}); }catch(e){} }
+async function loadHistory(){ if(!currentUser) return; try{ const q = query(collection(db,"history"), where("uid","==",currentUser.uid), orderBy("time","desc"), limit(20)); const snap = await getDocs(q); const list = document.getElementById("historyList"); const empty = document.getElementById("emptyHistory"); if(snap.empty){ list.innerHTML=""; empty.style.display="block"; return; } empty.style.display="none"; let html=""; snap.forEach(d=>{ const h=d.data(); html+='<div class="hist-row"><div class="left"><div class="ic">'+h.icon+'</div><div>'+h.title+'<small>'+h.date+'</small></div></div><b class="'+(h.isNeg?'neg':'')+'">'+h.amount+'</b></div>'; }); list.innerHTML=html; }catch(e){} }
+async function register(){
+  const fullName=document.getElementById("regFullName").value.trim();
+  const username=document.getElementById("regUsername").value.trim().toLowerCase();
+  const email=document.getElementById("regEmail").value.trim();
+  const country=document.getElementById("regCountry").value;
+  const phone=document.getElementById("regPhone").value.trim();
+  const sponsor=document.getElementById("regSponsor").value.trim();
+  const pass=document.getElementById("regPass").value;
+  const pass2=document.getElementById("regPass2").value;
+  if(!fullName) return alert("Enter Full Name");
+  if(!username) return alert("Enter Username");
+  if(!email) return alert("Enter Email");
+  if(!phone) return alert("Enter Number");
+  if(pass!==pass2) return alert("Passwords no match");
+  if(pass.length<6) return alert("Min 6 chars");
+  if(!document.getElementById("terms").checked) return alert("Accept Terms");
+  try{
+    const cred=await createUserWithEmailAndPassword(auth,email,pass);
+    await setDoc(doc(db,"users",cred.user.uid),{fullName:fullName,name:username,username:username,email:email,phone:phone,country:country,sponsor:sponsor,balance:10.00,earned:10.00,day:1,lastClaim:"",referrals:0,lang:currentLang,payoutCoin:"",payoutAddress:"",created:Date.now()});
+    document.getElementById("welcomeName").textContent=username;
+    document.getElementById("welcomeUser").textContent=username;
+    document.getElementById("welcomeEmail").textContent=email;
+    currentUser=cred.user;
+    await addHistory("Sign-Up Bonus","+$10.00","🎁");
+    showScreen("welcomePage");
+  }catch(e){ alert(e.message); }
+}
+async function login(){
+  const val=document.getElementById("loginEmail").value.trim();
+  const pass=document.getElementById("loginPass").value;
+  if(!val||!pass) return alert("Enter email/username and password");
+  let email=val;
+  if(!val.includes("@")){
+    try{
+      const snap=await getDocs(query(collection(db,"users"), where("name","==",val.toLowerCase())));
+      if(!snap.empty) email=snap.docs[0].data().email;
+      else email=val+"@biggest.local";
+    }catch(e){}
+  }
+  try{ await signInWithEmailAndPassword(auth,email,pass); }catch(e){ alert("Login failed: "+e.message); }
+}
+function logout(){ signOut(auth).then(()=>{ showScreen("loginPage"); }); }
+function showAuth(){ showScreen("authPage"); document.getElementById("navBar").classList.remove("show"); }
+function showLogin(){ showScreen("loginPage"); document.getElementById("navBar").classList.remove("show"); }
+function goHome(){ showScreen("homePage"); document.getElementById("navHome").classList.add("active"); document.getElementById("navBar").classList.add("show"); refreshUI(); }
+function goEarn(){ showScreen("earnPage"); document.getElementById("navEarn").classList.add("active"); document.getElementById("navBar").classList.add("show"); refreshUI(); }
+function goTeam(){ showScreen("teamPage"); document.getElementById("navTeam").classList.add("active"); document.getElementById("navBar").classList.add("show"); document.getElementById("refLink").textContent=window.location.origin+"/register?ref="+currentUser.uid.slice(0,8); getDoc(doc(db,"users",currentUser.uid)).then(s=>{ const r=s.data()?.referrals||0; document.getElementById("totalTeam").textContent=r; document.getElementById("activeTeam").textContent=r; document.getElementById("todayTeam").textContent=r; }); }
+function goWallet(){ showScreen("walletPage"); document.getElementById("navWallet").classList.add("active"); document.getElementById("navBar").classList.add("show"); refreshUI(); loadHistory(); }
+function goMe(){ showScreen("mePage"); document.getElementById("navMe").classList.add("active"); document.getElementById("navBar").classList.add("show"); refreshUI(); }
+function goPayout(){ showScreen("payoutPage"); document.getElementById("navBar").classList.add("show"); }
+function selectCrypto(el){ document.querySelectorAll(".crypto-chip").forEach(c=>c.classList.remove("active")); el.classList.add("active"); selectedCoin=el.dataset.c; document.querySelectorAll(".crypto-chip").forEach(c=>{ if(c.dataset.c===selectedCoin) c.classList.add("active"); }); }
+async function savePayout(){ const addr=document.getElementById("payoutAddress").value.trim(); if(!addr) return alert("Enter wallet address"); const net=document.getElementById("payoutNetwork").value.trim(); await updateDoc(doc(db,"users",currentUser.uid),{payoutCoin:selectedCoin,payoutAddress:addr,payoutNetwork:net}); document.getElementById("savedPayout").style.display="block"; document.getElementById("savedPayout").innerHTML="✅ Saved: <b style='color:#e8b44a;'>"+selectedCoin+"</b><br><span style='word-break:break-all;'>"+addr+"</span>"; alert("Payout saved"); refreshUI(); }
+async function savePayout2(){ const addr=document.getElementById("payoutAddress2").value.trim(); if(!addr) return alert("Enter address"); await updateDoc(doc(db,"users",currentUser.uid),{payoutCoin:selectedCoin,payoutAddress:addr}); alert("Saved!"); goWallet(); }
+function copyText(id){ navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>alert("Copied")); }
+function copyRef(){ navigator.clipboard.writeText(document.getElementById("refLink").textContent).then(()=>alert("Invite link copied!")); }
+async function refreshUI(){ if(!currentUser) return; const snap=await getDoc(doc(db,"users",currentUser.uid)); const u=snap.data(); if(!u) return; const name=u.name||u.username||currentUser.email.split("@")[0]; document.getElementById("helloUser").textContent=name; document.getElementById("userCode").textContent=name.toUpperCase(); document.getElementById("bal").textContent=u.balance.toFixed(2); document.getElementById("walletBal").textContent=u.balance.toFixed(2); document.getElementById("earnedToday").textContent=u.earned.toFixed(2); document.getElementById("dayNum").textContent=u.day; document.getElementById("dayNum2").textContent=u.day; const claimed=u.lastClaim===todayStr(); const c1=document.getElementById("claimBtn"); const c2=document.getElementById("claimBtn2"); if(c1) c1.textContent=claimed?"Claimed":"Claim"; if(c2) c2.textContent=claimed?"Claimed":"Claim"; const meName=document.getElementById("meName"); if(meName){ meName.textContent=name; document.getElementById("meAvatar").textContent=name[0].toUpperCase(); } if(u.payoutAddress){ document.getElementById("payoutAddress").value=u.payoutAddress; document.getElementById("payoutNetwork").value=u.payoutNetwork||""; document.getElementById("savedPayout").style.display="block"; document.getElementById("savedPayout").innerHTML="✅ Saved: <b style='color:#e8b44a;'>"+(u.payoutCoin||"USDT")+"</b><br><span style='word-break:break-all;'>"+u.payoutAddress+"</span>"; document.getElementById("walletPayoutInfo").innerHTML="✅ <b style='color:#e8b44a;'>"+(u.payoutCoin||"")+"</b><br><span style='word-break:break-all; color:#fff;'>"+u.payoutAddress+"</span>"; selectedCoin=u.payoutCoin||selectedCoin; } }
+async function claimDaily(){ const ref=doc(db,"users",currentUser.uid); const snap=await getDoc(ref); const u=snap.data(); if(u.lastClaim===todayStr()) return alert("Already claimed"); await updateDoc(ref,{balance:u.balance+settings.claim,earned:u.earned+settings.claim,day:(u.day||1)+1,lastClaim:todayStr()}); await addHistory("Daily Bonus Day "+u.day,"+$"+settings.claim.toFixed(2),"🎁"); refreshUI(); alert("+"+settings.claim.toFixed(2)); }
+async function doWatch(btn,amount,key){ const ref=doc(db,"users",currentUser.uid); const snap=await getDoc(ref); const u=snap.data(); const wk="watch_"+key+"_"+todayStr(); if(u[wk]) return alert("Already watched"); window.open("https://www.youtube.com","_blank"); setTimeout(async()=>{ const s2=await getDoc(ref); const uu=s2.data(); await updateDoc(ref,{balance:uu.balance+amount,earned:uu.earned+amount,[wk]:true}); await addHistory("Watch & Earn - "+key,"+$"+amount.toFixed(2),"▶️"); refreshUI(); alert("You earned $"+amount.toFixed(2)); btn.textContent="Done"; },1200); }
+async function cashout(){ const ref=doc(db,"users",currentUser.uid); const snap=await getDoc(ref); const u=snap.data(); if(!u.payoutAddress) { if(!confirm("You never add crypto address. Add am now?")) return; goMe(); return; } if(u.balance<5) return alert("Min $5 - Balance $"+u.balance.toFixed(2)); if(!confirm("Withdraw $"+u.balance.toFixed(2)+" to "+u.payoutCoin+" : "+u.payoutAddress+" ?")) return; await addDoc(collection(db,"cashouts"),{uid:currentUser.uid,email:currentUser.email,amount:u.balance,coin:u.payoutCoin,address:u.payoutAddress,status:"pending",time:Date.now()}); await addHistory("Cash Out to "+u.payoutCoin,"-$"+u.balance.toFixed(2),"💳",true); alert("Cashout sent"); loadHistory(); }
+window.register=register; window.login=login; window.logout=logout; window.showLogin=showLogin; window.showAuth=showAuth; window.goHome=goHome; window.goEarn=goEarn; window.goTeam=goTeam; window.goWallet=goWallet; window.goMe=goMe; window.goPayout=goPayout; window.copyRef=copyRef; window.copyText=copyText; window.claimDaily=claimDaily; window.doWatch=doWatch; window.cashout=cashout; window.loadHistory=loadHistory; window.savePayout=savePayout; window.savePayout2=savePayout2; window.selectCrypto=selectCrypto; window.toggleLang=toggleLang; window.setLang=setLang; window.togglePass=togglePass;
+</script>
+</body>
+  </html>
